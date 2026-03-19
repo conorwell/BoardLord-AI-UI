@@ -29,7 +29,7 @@ export default function BoardOverlay({ selectedHolds, onHoldClick }) {
   const imgRef = useRef(null)
 
   useEffect(() => {
-    fetch('/position_map.json')
+    fetch(`${import.meta.env.BASE_URL}position_map.json`)
       .then(r => r.json())
       .then(setPositionMap)
   }, [])
@@ -46,7 +46,7 @@ export default function BoardOverlay({ selectedHolds, onHoldClick }) {
       <div className="board-container">
         <img
           ref={imgRef}
-          src="/TB2_Mirror_Image.png"
+          src={`${import.meta.env.BASE_URL}TB2_Mirror_Image.png`}
           alt="Tension Board 2 Mirror"
           onLoad={handleImgLoad}
           draggable={false}

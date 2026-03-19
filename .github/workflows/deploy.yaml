@@ -65,4 +65,5 @@ jobs:
       - name: Deploy to GCS
         run: |
           gsutil -m rsync -r dist gs://${{ secrets.GCP_BUCKET }}
-          gsutil cp -h "Cache-Control:no-cache, no-store, must-revalidate" dist/index.html gs://${{ secrets.GCP_BUCKET }}/index.html
+          gsutil setmeta -h "Cache-Control:no-cache, no-store, must-revalidate" gs://${{ secrets.GCP_BUCKET }}/index.html
+

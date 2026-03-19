@@ -1,0 +1,456 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.app-header h1 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.app-header .subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-section h2 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* Tool palette */
+.tool-palette {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.tool-btn:hover {
+  background: var(--surface2);
+}
+
+.tool-btn.active {
+  border-color: currentColor;
+  background: var(--surface2);
+}
+
+.tool-btn .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tool-btn[data-role="5"]  { color: var(--role-start);  }
+.tool-btn[data-role="6"]  { color: var(--role-hand);   }
+.tool-btn[data-role="7"]  { color: var(--role-finish); }
+.tool-btn[data-role="8"]  { color: var(--role-foot);   }
+.tool-btn[data-role="erase"] { color: var(--text-muted); }
+
+/* Angle selector */
+.angle-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+
+.angle-btn {
+  padding: 6px 4px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 12px;
+  transition: all 0.12s;
+}
+
+.angle-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.angle-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Nomatch toggle */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.toggle-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toggle-label span:first-child {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.toggle-label span:last-child {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.toggle {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: var(--border);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+}
+
+.toggle input:checked + .toggle-track {
+  background: var(--accent);
+}
+
+.toggle input:checked + .toggle-track::after {
+  transform: translateX(16px);
+}
+
+/* Hold count */
+.hold-counts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.count-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.count-row .label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.count-row .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.count-row .num {
+  font-weight: 600;
+  color: var(--text);
+  min-width: 20px;
+  text-align: right;
+}
+
+.dot-start  { background: var(--role-start); }
+.dot-hand   { background: var(--role-hand); }
+.dot-finish { background: var(--role-finish); }
+.dot-foot   { background: var(--role-foot); }
+
+/* Actions */
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 8px;
+  transition: all 0.15s;
+}
+
+.btn-secondary:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+/* ── Result panel ── */
+.result-panel {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-placeholder {
+  text-align: center;
+  padding: 12px 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.result-grade {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.grade-display {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.grade-confidence {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.prob-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prob-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.prob-label {
+  width: 32px;
+  text-align: right;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.prob-bar-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface2);
+  overflow: hidden;
+}
+
+.prob-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+
+.prob-bar-fill.predicted {
+  background: var(--role-finish);
+}
+
+.prob-pct {
+  width: 32px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+}
+
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  padding: 16px 0;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.error-msg {
+  font-size: 12px;
+  color: var(--role-foot);
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* ── Board area ── */
+.board-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: auto;
+  background: #0a0a0d;
+}
+
+.board-container {
+  position: relative;
+  user-select: none;
+}
+
+.board-container img {
+  display: block;
+  max-height: calc(100vh - 100px);
+  width: auto;
+}
+
+/* Hold buttons */
+.hold-btn {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, border-color 0.1s, background 0.1s;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hold-btn:hover {
+  transform: translate(-50%, -50%) scale(1.4);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.18);
+  z-index: 10;
+}
+
+.hold-btn.role-5 {
+  background: var(--role-start);
+  border-color: var(--role-start);
+}
+
+.hold-btn.role-6 {
+  background: var(--role-hand);
+  border-color: var(--role-hand);
+}
+
+.hold-btn.role-7 {
+  background: var(--role-finish);
+  border-color: var(--role-finish);
+}
+
+.hold-btn.role-8 {
+  background: var(--role-foot);
+  border-color: var(--role-foot);
+}
+
+.hold-btn.role-5:hover,
+.hold-btn.role-6:hover,
+.hold-btn.role-7:hover,
+.hold-btn.role-8:hover {
+  filter: brightness(1.3);
+}

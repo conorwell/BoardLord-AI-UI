@@ -1,0 +1,41 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0d0d10;
+  --surface: #16161c;
+  --surface2: #1f1f27;
+  --border: #2a2a36;
+  --text: #e2e2ee;
+  --text-muted: #7a7a90;
+  --accent: #7c6fff;
+
+  --role-start: #22c55e;
+  --role-hand: #3b82f6;
+  --role-finish: #f59e0b;
+  --role-foot: #ef4444;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+}

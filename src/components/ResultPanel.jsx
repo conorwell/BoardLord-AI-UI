@@ -22,7 +22,7 @@ export default function ResultPanel({ result, loading, error }) {
   if (!result) {
     return (
       <div className="result-panel">
-        <p className="result-placeholder">Set holds and predict</p>
+        <p className="result-placeholder">Click "Predict Grade" to see results</p>
       </div>
     )
   }

@@ -23,7 +23,7 @@ function toPercent(x, y) {
   return { left: left * 100, top: top * 100 }
 }
 
-export default function BoardOverlay({ selectedHolds, activeTool, onHoldClick }) {
+export default function BoardOverlay({ selectedHolds, onHoldClick }) {
   const [positionMap, setPositionMap] = useState(null)
   const [imgSize, setImgSize] = useState({ w: 0, h: 0 })
   const imgRef = useRef(null)

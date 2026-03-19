@@ -64,5 +64,5 @@ jobs:
 
       - name: Deploy to GCS
         run: |
-          gsutil -m rsync -r dist gs://board-lord-ai/uis
-          gsutil cp -h "Cache-Control:no-cache, no-store, must-revalidate" dist/index.html gs://board-lord-ai/uis/index.html
+          gsutil -m rsync -r dist gs://${{ secrets.GCP_BUCKET }}
+          gsutil cp -h "Cache-Control:no-cache, no-store, must-revalidate" dist/index.html gs://${{ secrets.GCP_BUCKET }}/index.html

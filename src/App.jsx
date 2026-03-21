@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import BoardOverlay from './components/BoardOverlay'
 import Sidebar from './components/sidebar/Sidebar'
+import ResultPanel from './components/ResultPanel'
+import ActionButtons from './components/sidebar/ActionButtons'
 import { usePrediction } from './hooks/usePrediction'
 
 export default function App() {
@@ -54,6 +56,14 @@ export default function App() {
           activeTool={activeTool}
           onHoldClick={handleHoldClick}
         />
+        <div className="mobile-bottom">
+          <ResultPanel result={result} loading={loading} error={error} />
+          <ActionButtons
+            canPredict={canPredict}
+            onPredict={() => predict(selectedHolds, angle, isNomatch)}
+            onClear={() => setSelectedHolds([])}
+          />
+        </div>
       </div>
     </div>
   )

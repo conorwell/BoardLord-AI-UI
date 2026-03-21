@@ -16,8 +16,10 @@ export default function Sidebar({
       <ToolPalette activeTool={activeTool} onToolChange={onToolChange} />
       <AngleSelector angle={angle} onAngleChange={onAngleChange} />
       <MatchingToggle isNomatch={isNomatch} onChange={onNomatchChange} />
-      <ResultPanel result={result} loading={loading} error={error} />
-      <ActionButtons canPredict={canPredict} onPredict={onPredict} onClear={onClear} />
+      <div className="sidebar-result">
+        <ResultPanel result={result} loading={loading} error={error} />
+        <ActionButtons canPredict={canPredict} onPredict={onPredict} onClear={onClear} />
+      </div>
     </aside>
   )
 }

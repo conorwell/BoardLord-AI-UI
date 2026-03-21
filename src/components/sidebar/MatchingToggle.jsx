@@ -5,7 +5,6 @@ export default function MatchingToggle({ isNomatch, onChange }) {
       <div className="toggle-row">
         <div className="toggle-label">
           <span>No Match</span>
-          <span>Finish must be one-handed</span>
         </div>
         <label className="toggle">
           <input

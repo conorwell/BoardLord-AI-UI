@@ -1,6 +1,7 @@
-export default function ActionButtons({ canPredict, onPredict, onClear }) {
+export default function ActionButtons({ canPredict, validationMsg, onPredict, onClear }) {
   return (
     <div className="sidebar-section">
+      {validationMsg && <p className="validation-msg">{validationMsg}</p>}
       <button
         className="btn-primary"
         onClick={onPredict}

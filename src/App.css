@@ -427,6 +427,14 @@
   padding: 8px 0;
 }
 
+.validation-msg {
+  font-size: 12px;
+  color: var(--role-foot);
+  text-align: center;
+  padding: 4px 0 8px;
+  margin: 0;
+}
+
 /* ── Board area ── */
 .board-area {
   flex: 1;

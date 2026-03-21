@@ -30,7 +30,13 @@ export default function App() {
     })
   }
 
-  const canPredict = selectedHolds.length > 0 && !loading
+  const hasStart  = selectedHolds.some(h => h.role === 5)
+  const hasFinish = selectedHolds.some(h => h.role === 7)
+  const validationMsg = !hasStart && !hasFinish ? 'Add a start and finish hold'
+    : !hasStart  ? 'Add a start hold'
+    : !hasFinish ? 'Add a finish hold'
+    : null
+  const canPredict = !validationMsg && !loading
 
   return (
     <div className="app">
@@ -48,6 +54,7 @@ export default function App() {
           isNomatch={isNomatch}       onNomatchChange={setIsNomatch}
           result={result}             loading={loading}             error={error}
           canPredict={canPredict}
+          validationMsg={validationMsg}
           onPredict={() => predict(selectedHolds, angle, isNomatch)}
           onClear={() => setSelectedHolds([])}
         />
@@ -60,6 +67,7 @@ export default function App() {
           <ResultPanel result={result} loading={loading} error={error} />
           <ActionButtons
             canPredict={canPredict}
+            validationMsg={validationMsg}
             onPredict={() => predict(selectedHolds, angle, isNomatch)}
             onClear={() => setSelectedHolds([])}
           />

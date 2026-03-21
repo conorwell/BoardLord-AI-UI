@@ -37,7 +37,7 @@ export default function App() {
       <header className="app-header">
         <div>
           <h1>BoardLord</h1>
-          <p className="subtitle">Standardized Board Autograder</p>
+          <p className="subtitle">Standardized Board Auto-grader</p>
         </div>
       </header>
 

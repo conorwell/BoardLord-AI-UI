@@ -67,3 +67,6 @@ jobs:
           gsutil -m rsync -r dist gs://${{ secrets.GCP_BUCKET }}
           gsutil setmeta -h "Cache-Control:no-cache, no-store, must-revalidate" gs://${{ secrets.GCP_BUCKET }}/index.html
 
+      - name: Deploy to Firebase Hosting
+        run: npx firebase-tools deploy --only hosting --token ${{ secrets.FIREBASE_TOKEN }} --non-interactive
+

@@ -36,8 +36,8 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div>
-          <h1>BoardLord.AI</h1>
-          <p className="subtitle">Tension Board 2 Mirror — Grade Predictor</p>
+          <h1>BoardLord</h1>
+          <p className="subtitle">Standardized Board Autograder</p>
         </div>
       </header>
 

@@ -24,7 +24,7 @@ describe('clientId', () => {
     expect(first).toBeNull()
 
     // Trigger a predict call so getClientId() runs
-    global.fetch = mockFetch(200, { grade: 'V5', probabilities: {} })
+    globalThis.fetch = mockFetch(200, { grade: 'V5', probabilities: {} })
     const { result } = renderHook(() => usePrediction())
     act(() => { result.current.predict([], 40, false) })
 
@@ -33,7 +33,7 @@ describe('clientId', () => {
   })
 
   it('reuses the same clientId across calls', async () => {
-    global.fetch = mockFetch(200, { grade: 'V5', probabilities: {} })
+    globalThis.fetch = mockFetch(200, { grade: 'V5', probabilities: {} })
     const { result } = renderHook(() => usePrediction())
 
     await act(() => result.current.predict([], 40, false))
@@ -48,25 +48,25 @@ describe('clientId', () => {
 
 describe('request headers', () => {
   it('sends X-Client-ID and X-Session-ID on every request', async () => {
-    global.fetch = mockFetch(200, { grade: 'V5', probabilities: {} })
+    globalThis.fetch = mockFetch(200, { grade: 'V5', probabilities: {} })
     const { result } = renderHook(() => usePrediction())
 
     await act(() => result.current.predict([], 40, false))
 
-    const [, options] = global.fetch.mock.calls[0]
+    const [, options] = globalThis.fetch.mock.calls[0]
     expect(options.headers['X-Client-ID']).toMatch(UUID_RE)
     expect(options.headers['X-Session-ID']).toMatch(UUID_RE)
   })
 
   it('sends the same session ID on repeated calls', async () => {
-    global.fetch = mockFetch(200, { grade: 'V5', probabilities: {} })
+    globalThis.fetch = mockFetch(200, { grade: 'V5', probabilities: {} })
     const { result } = renderHook(() => usePrediction())
 
     await act(() => result.current.predict([], 40, false))
     await act(() => result.current.predict([], 40, false))
 
-    const sid1 = global.fetch.mock.calls[0][1].headers['X-Session-ID']
-    const sid2 = global.fetch.mock.calls[1][1].headers['X-Session-ID']
+    const sid1 = globalThis.fetch.mock.calls[0][1].headers['X-Session-ID']
+    const sid2 = globalThis.fetch.mock.calls[1][1].headers['X-Session-ID']
     expect(sid1).toBe(sid2)
   })
 })
@@ -80,7 +80,7 @@ describe('error messages', () => {
   ]
 
   it.each(cases)('status %i → correct message', async (status, expected) => {
-    global.fetch = mockFetch(status, { detail: 'raw server message' })
+    globalThis.fetch = mockFetch(status, { detail: 'raw server message' })
     const { result } = renderHook(() => usePrediction())
 
     await act(() => result.current.predict([], 40, false))
@@ -93,7 +93,7 @@ describe('error messages', () => {
 describe('success', () => {
   it('sets result on 200', async () => {
     const payload = { grade: 'V5', probabilities: { V4: 0.2, V5: 0.6, V6: 0.2 } }
-    global.fetch = mockFetch(200, payload)
+    globalThis.fetch = mockFetch(200, payload)
     const { result } = renderHook(() => usePrediction())
 
     await act(() => result.current.predict([], 40, false))
